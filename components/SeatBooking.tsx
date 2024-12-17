@@ -63,13 +63,12 @@ interface SeatBookingProps {
   maxSelectableSeats: number
 }
 
-const SeatBooking: React.FC<SeatBookingProps> = ({ rows, seatsPerRow, maxSelectableSeats }) => {
+const SeatBooking = ({ rows, seatsPerRow, maxSelectableSeats }: SeatBookingProps) => {
   const [selectedSeats, setSelectedSeats] = useState<string[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [sessionId, setSessionId] = useState('')
   const [unavailableSeats, setUnavailableSeats] = useState<Record<string, string>>({})
 
-  // Update the useEffect to also track unavailable seats
   useEffect(() => {
     const newSessionId = generateSessionId();
     setSessionId(newSessionId);
@@ -137,11 +136,10 @@ const SeatBooking: React.FC<SeatBookingProps> = ({ rows, seatsPerRow, maxSelecta
     return <div className="text-center text-white">Loading...</div>;
   }
 
-  // Update the renderSeats function to check for unavailable seats
   const renderSeats = () => {
-    let seats = []
+    const seats = []
     for (let i = 0; i < rows; i++) {
-      let row = []
+      const row = []
       for (let j = 0; j < seatsPerRow; j++) {
         const seatId = `${String.fromCharCode(65 + i)}${j + 1}`
         row.push(
@@ -231,6 +229,4 @@ const SeatBooking: React.FC<SeatBookingProps> = ({ rows, seatsPerRow, maxSelecta
   )
 }
 
-export default function SeatBookingPage() {
-  return <SeatBooking rows={8} seatsPerRow={12} maxSelectableSeats={5} />
-}
+export default SeatBooking;

@@ -1,5 +1,5 @@
 import SeatBooking from '@/components/SeatBooking'
-import PageTransition from '@/components/PageTransition'
+import PageTransition from '../../components/PageTransition'
 
 export default function SeatsPage() {
   return (

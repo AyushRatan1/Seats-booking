@@ -1,6 +1,6 @@
 "use client"
 
-import Link from 'next/link';
+
 import { Armchair, Ticket, Clapperboard } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
