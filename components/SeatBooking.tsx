@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { cn } from "@/lib/utils"
 import { generateSessionId } from "@/lib/utils"
+import Ticket from "@/components/Ticket"
 
 interface SeatProps {
   id: string
@@ -68,6 +69,7 @@ const SeatBooking = ({ rows, seatsPerRow, maxSelectableSeats }: SeatBookingProps
   const [isLoading, setIsLoading] = useState(true)
   const [sessionId, setSessionId] = useState('')
   const [unavailableSeats, setUnavailableSeats] = useState<Record<string, string>>({})
+  const [showTicket, setShowTicket] = useState(false)
 
   useEffect(() => {
     const newSessionId = generateSessionId();
@@ -201,7 +203,7 @@ const SeatBooking = ({ rows, seatsPerRow, maxSelectableSeats }: SeatBookingProps
                 "shadow-lg shadow-red-500/20 hover:shadow-red-500/30",
                 "focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-900"
               )}
-              onClick={() => alert(`Booking confirmed for seats: ${selectedSeats.join(', ')}`)}
+              onClick={() => setShowTicket(true)}
               disabled={selectedSeats.length === 0}
             >
               Confirm Selection
@@ -225,6 +227,13 @@ const SeatBooking = ({ rows, seatsPerRow, maxSelectableSeats }: SeatBookingProps
           </div>
         </div>
       </div>
+
+      {showTicket && (
+        <Ticket 
+          selectedSeats={selectedSeats} 
+          onClose={() => setShowTicket(false)}
+        />
+      )}
     </div>
   )
 }
